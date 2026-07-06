@@ -110,6 +110,7 @@
     var pending = 0;
     Array.prototype.forEach.call(imgs, function (img) {
       if (img.complete && img.naturalWidth > 0) return;
+      if (img.loading === 'lazy') return;
       pending += 1;
       img.addEventListener('load', onDone, { once: true });
       img.addEventListener('error', onDone, { once: true });
@@ -395,15 +396,7 @@
         form.reportValidity();
         return;
       }
-      var success = form.querySelector('.success-message');
-      var fields = form.querySelector(fieldsSelector);
-      if (fields) fields.style.visibility = 'hidden';
-      var submitBtn = form.querySelector('.btn-submit');
-      var note = form.querySelector('.form-note');
-      if (submitBtn) submitBtn.style.visibility = 'hidden';
-      if (note) note.style.visibility = 'hidden';
-      success.hidden = false;
-      success.focus();
+      window.location.href = 'thanks.html';
     });
   }
 
